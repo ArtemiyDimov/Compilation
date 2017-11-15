@@ -1,0 +1,19 @@
+== Sujet de projet
+
+En janvier
+
+* Présentation ~15 minutes
+** Ce que c'est
+** Fonctionnement
+** utilisation
+** Exemple
+
+* 1-2 pages renseignement où trouver, comment faire, comment utiliser
+
+
+Sujet :
+* CUDA
+* OpenMP
+* Roofline model
+* etc
+
