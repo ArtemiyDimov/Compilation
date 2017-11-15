@@ -1,0 +1,53 @@
+== Réponse aux questions
+
+=== Exercice 1: Compilation séparée
+
+.Exemple code assembleur daxpy non optimisé
+[source]
+----
+dimov@uds-500090:~/Bureau/Cours/Compilation/Tp2$ objdump -d daxpy.o
+
+daxpy.o:     format de fichier elf64-x86-64
+
+
+Déassemblage de la section .text :
+
+0000000000000000 <daxpy>:
+   0:	55                   	push   %rbp
+   1:	48 89 e5             	mov    %rsp,%rbp
+   4:	48 89 7d e8          	mov    %rdi,-0x18(%rbp)
+   8:	48 89 75 e0          	mov    %rsi,-0x20(%rbp)
+   c:	48 89 55 d8          	mov    %rdx,-0x28(%rbp)
+  10:	f2 0f 11 45 d0       	movsd  %xmm0,-0x30(%rbp)
+  15:	48 c7 45 f8 00 00 00 	movq   $0x0,-0x8(%rbp)
+  1c:	00 
+  1d:	eb 53                	jmp    72 <daxpy+0x72>
+  1f:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+  23:	48 8d 14 c5 00 00 00 	lea    0x0(,%rax,8),%rdx
+  2a:	00 
+  2b:	48 8b 45 d8          	mov    -0x28(%rbp),%rax
+  2f:	48 01 d0             	add    %rdx,%rax
+  32:	48 8b 55 f8          	mov    -0x8(%rbp),%rdx
+  36:	48 8d 0c d5 00 00 00 	lea    0x0(,%rdx,8),%rcx
+  3d:	00 
+  3e:	48 8b 55 d8          	mov    -0x28(%rbp),%rdx
+  42:	48 01 ca             	add    %rcx,%rdx
+  45:	f2 0f 10 0a          	movsd  (%rdx),%xmm1
+  49:	48 8b 55 f8          	mov    -0x8(%rbp),%rdx
+  4d:	48 8d 0c d5 00 00 00 	lea    0x0(,%rdx,8),%rcx
+  54:	00 
+  55:	48 8b 55 e0          	mov    -0x20(%rbp),%rdx
+  59:	48 01 ca             	add    %rcx,%rdx
+  5c:	f2 0f 10 02          	movsd  (%rdx),%xmm0
+  60:	f2 0f 59 45 d0       	mulsd  -0x30(%rbp),%xmm0
+  65:	f2 0f 58 c1          	addsd  %xmm1,%xmm0
+  69:	f2 0f 11 00          	movsd  %xmm0,(%rax)
+  6d:	48 83 45 f8 01       	addq   $0x1,-0x8(%rbp)
+  72:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+  76:	48 3b 45 e8          	cmp    -0x18(%rbp),%rax
+  7a:	72 a3                	jb     1f <daxpy+0x1f>
+  7c:	5d                   	pop    %rbp
+  7d:	c3                   	retq   
+----
+
+option compilateur -c = comilation partielle
