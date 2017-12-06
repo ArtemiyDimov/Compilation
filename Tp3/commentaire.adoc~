@@ -1,0 +1,21 @@
+== Utilisation de openmp (parallélisation)
+
+Pour compiler avec openmp inclus il faut rajouter `-fopenmp` dans les options de compilation
+
+Comparaison time matmul :
+* Sans openmp : real	0m3.304s
+* Avec openmp : real	0m1.574s
+
+4. Dépendances et boucles 
+* Boucles normales :
+** Séquentiel : real	0m0.069s
+** Parallèle : real	0m0.110s
+
+* Boucles intervertit :
+** Séquentiel :real	0m0.172s
+** Parallèle : real	0m0.157s
+
+* Boucles normales, fonctions compliquées:
+** Séquentiel :real	0m0.585s
+** Prallèle :real	0m0.195s
+
